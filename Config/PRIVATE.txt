@@ -1,0 +1,3 @@
+# NSS USB WAN v0.1 is opt-in. The isolated experiment appends its selection
+# after this private configuration, as Settings.sh does for WRT_PACKAGE.
+# CONFIG_PACKAGE_kmod-nss-usbnet is not set
