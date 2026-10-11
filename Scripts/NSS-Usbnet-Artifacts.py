@@ -86,7 +86,7 @@ def main():
     kernel_releases = []
     for build_root in build_roots:
         preserve(build_root / "symvers/qca-nss-drv.symvers")
-        for kernel in sorted(build_root.glob("linux-*")):
+        for kernel in sorted(build_root.glob("linux-[0-9]*")):
             if not kernel.is_dir():
                 continue
             for name in (".config", ".vermagic", "Module.symvers", "include/config/kernel.release"):
@@ -208,7 +208,7 @@ def main():
                                      for name in ("nss_arch.h", "nss_def.h", "nss_cmn.h")):
             raise RuntimeError("Missing staged NSS API headers")
         for build_root in build_roots:
-            for kernel in build_root.glob("linux-*"):
+            for kernel in build_root.glob("linux-[0-9]*"):
                 if kernel.is_dir():
                     for name in (".config", "Module.symvers", ".vermagic"):
                         if not (kernel / name).is_file() or not (kernel / name).stat().st_size:
