@@ -34,7 +34,7 @@ define Build/Compile
 	@test -r "$(STAGING_DIR)/usr/include/qca-nss-drv/nss_cmn.h"
 	@test -s "$(LINUX_DIR)/Module.symvers"
 	@test -s "$(PKG_SYMVERS_DIR)/qca-nss-drv.symvers"
-	@awk '$$2 == "nss_cmn_get_interface_number_by_dev" && $$4 ~ /^EXPORT_SYMBOL/ { found = 1 } END { exit !found }' \
+	@awk '$$$$2 == "nss_cmn_get_interface_number_by_dev" && $$$$4 ~ /^EXPORT_SYMBOL/ { found = 1 } END { exit !found }' \
 		"$(PKG_SYMVERS_DIR)/qca-nss-drv.symvers" || \
 		{ echo 'Required NSS lookup symbol is not exported by this build' >&2; exit 1; }
 	+$(KERNEL_MAKE) M="$(PKG_BUILD_DIR)" \
