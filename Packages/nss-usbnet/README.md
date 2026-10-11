@@ -176,6 +176,17 @@ Actions artifact 名称为 `nss-usbnet-v0.1-<run_id>-<run_attempt>`，申请保�
 回退探测只需正常卸载/删除包；回退配套固件则使用用户已保存的可用镜像。
 v0.1 的成功标准是只读观察和生命周期安全，不要求 ECM/NSS 加速计数增加。
 
+## CI 问题记录
+
+本次 CI 日志报告 `luci-app-fullconenat-sonic` 的
+`001-integrate-firewall-zones.patch` 无法应用（`Hunk #3` 失败）。NSS 专用配置
+显式禁用 `CONFIG_PACKAGE_luci-app-fullconenat-sonic`，实验 workflow 在
+`make defconfig` 后断言它仍未选中；此处不修改上游补丁或公共构建流程。
+
+日志还报告 U-Boot `printinitialenv: Exec format error`。目前尚未核实失败的
+可执行文件架构、生成方式及调用路径，因此仅记录该问题，暂不修改 U-Boot 或
+构建工具。禁用上述 LuCI 插件不代表该错误已经解决，后续 CI 仍需检查。
+
 ## 本地验证的范围
 
 提交前审查已在固定源码和上述五个锁定 Feeds 的实际构建树中执行 `make defconfig`，

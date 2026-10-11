@@ -98,6 +98,10 @@ jobs:
           grep -qx 'CONFIG_PACKAGE_kmod-nss-usbnet=m' .config
           grep -qx 'CONFIG_PACKAGE_nss-firmware=y' .config
           grep -qx 'CONFIG_KERNEL_DEBUG_FS=y' .config
+          if ! grep -qx '# CONFIG_PACKAGE_luci-app-fullconenat-sonic is not set' .config; then
+            echo 'NSS experiment requires luci-app-fullconenat-sonic to remain disabled after defconfig' >&2
+            exit 1
+          fi
           grep -qE '^[[:space:]]*override NSS_MAJOR=12$' package/qca-nss/nss-firmware/Makefile
           grep -qE '^[[:space:]]*override NSS_MINOR=5$' package/qca-nss/nss-firmware/Makefile
           grep -qE '^[[:space:]]*override NSS_REL=210$' package/qca-nss/nss-firmware/Makefile
